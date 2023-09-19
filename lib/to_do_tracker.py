@@ -7,8 +7,11 @@ class ToDoTracker():
         self.to_do_list = []
     
     def add(self, task:str):
-        self.to_do_list.append(task)
-        print("Test added")
+        if type(task) != str:
+            raise Exception("Incorrect input type") 
+        else:
+            self.to_do_list.append(task)
+            print("Test added")
     
     def all(self):
         all = ""
@@ -16,11 +19,20 @@ class ToDoTracker():
             all += f"{self.to_do_list.index(task) + 1}: {task}\n"
         return all 
 
-
         
-    # def complete(self, task):
-        
+    def complete(self, task):
+        if task not in self.to_do_list:
+            raise Exception("Task not found") 
+        for item in self.to_do_list:
+            if task == item:
+                self.to_do_list.remove(task)
 
+    def complete2(self, task_num: int):
+        if task_num > len(self.to_do_list):
+            raise Exception("Task not found")
+        for item in self.to_do_list:
+            if (task_num-1) == self.to_do_list.index(item):
+                self.to_do_list.remove(item)
 
 # As a user
 # So that I can focus on tasks to complete
